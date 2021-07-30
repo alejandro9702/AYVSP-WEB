@@ -1,3 +1,21 @@
-<div>
-  <h1>Bienvenidos</h1>
-</div>
+<header>
+  <ul>
+    <li><a [routerLink]="['/productos']" [routerLinkActive]="['router-link-active']">Productos</a></li>
+    <li><a [routerLink]="['/categorias']" [routerLinkActive]="['router-link-active']">Categorias</a></li>
+    <li class="logo"><a href="#">A&V SPORTS WEAR</a></li>
+    <!-- <li class="logo"><img src="../assets/img/LOGO/only logo blanco.png"></li> -->
+    <li><a [routerLink]="['/novedades']" [routerLinkActive]="['router-link-active']">Novedades</a></li>
+    <li><a [routerLink]="['/administradores']" [routerLinkActive]="['router-link-active']">Administradores</a></li>
+  </ul>
+</header>
+<img src="" alt="">
+<section id="content">
+  <router-outlet></router-outlet>
+</section>
+
+
+<footer>
+  A&V SPORTS WEAR
+  <a href="https://www.instagram.com/sportswear_i.v/">instagram</a>
+  <a href="">facebook</a>
+</footer>

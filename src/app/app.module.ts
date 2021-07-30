@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { routing, appRoutingProviders } from './app.routing';
 
 import { AppComponent } from './app.component';
-import { ProductsComponent } from './componentes/products/products.component';
-import { NewsComponent } from './componentes/news/news.component';
-import { CategoriesComponent } from './componentes/categories/categories.component';
-import { AdministratorsComponent } from './componentes/administrators/administrators.component';
+import { ProductsComponent } from './components/products/products.component';
+import { NewsComponent } from './components/news/news.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { AdministratorsComponent } from './components/administrators/administrators.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -13,12 +15,14 @@ import { AdministratorsComponent } from './componentes/administrators/administra
     ProductsComponent,
     NewsComponent,
     CategoriesComponent,
-    AdministratorsComponent
+    AdministratorsComponent,
+    ErrorComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    routing,
   ],
-  providers: [],
+  providers: [appRoutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
