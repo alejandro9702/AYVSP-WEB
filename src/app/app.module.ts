@@ -8,6 +8,7 @@ import { NewsComponent } from './components/news/news.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { AdministratorsComponent } from './components/administrators/administrators.component';
 import { ErrorComponent } from './components/error/error.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { ErrorComponent } from './components/error/error.component';
   imports: [
     BrowserModule,
     routing,
+    NgxPaginationModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
