@@ -9,6 +9,9 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { AdministratorsComponent } from './components/administrators/administrators.component';
 import { ErrorComponent } from './components/error/error.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
   imports: [
     BrowserModule,
     routing,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
