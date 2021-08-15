@@ -11,6 +11,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
     NgxPaginationModule,
     NgbModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]
