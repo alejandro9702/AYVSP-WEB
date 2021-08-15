@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FirebaseServiceService } from 'src/app/services/firebase-service.service';
 
 
 @Component({
@@ -11,13 +12,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProductsComponent implements OnInit {
   closeResult = '';
   productoForm: FormGroup;
+  ERROR_MESSAGE: string = "Error, intentelo de nuevo";
 
   constructor(
     private modalService: NgbModal,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private _firebaseServiceService: FirebaseServiceService
   ) { }
   config: any;
-  collection = { count: 10 , data: [] as any }
+  collection = { count: 10, data: [] as any }
 
 
   ngOnInit(): void {
@@ -25,24 +28,26 @@ export class ProductsComponent implements OnInit {
     this.config = {
       itemsPerPage: 5,
       currentPage: 1,
-      totalItems: this.collection.count
+      totalItems: this.collection.data.length
     };
 
     this.productoForm = this.fb.group({
       id: ['', Validators.required],
       nombre: ['', Validators.required],
       categoria: ['', Validators.required],
-    })
+    });
 
-    for (var i = 0; i < this.collection.count; i++) {
-      this.collection.data.push({
-        id: i,
-        nombre: "crosfit-shirt",
-        categoria: "shirt"
+    this._firebaseServiceService.getProducts().subscribe(result => {
+      this.collection.data = result.map((product: any) => {
+        return {
+          id: product.payload.doc.data().id,
+          nombre: product.payload.doc.data().nombre,
+          categoria: product.payload.doc.data().categoria,
+        }
       })
-    }
-
-
+    }, err => {
+      console.log(err)
+    });
 
   }
   pageChanged(event) {
@@ -53,8 +58,17 @@ export class ProductsComponent implements OnInit {
   }
 
   guardarProducto(): void {
+    this._firebaseServiceService.createProduct(this.productoForm.value).then(response => {
+      this.productoForm.reset();
+      this.modalService.dismissAll();
+    }).catch(error => {
+
+      alert(this.ERROR_MESSAGE);
+      console.log(this.ERROR_MESSAGE);
+
+    })
     this.collection.data.push(this.productoForm.value);
-    this.modalService.dismissAll();
+
   }
   open(content: any) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
